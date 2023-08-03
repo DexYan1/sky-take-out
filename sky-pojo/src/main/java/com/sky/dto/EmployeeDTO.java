@@ -13,10 +13,12 @@ public class EmployeeDTO implements Serializable {
 
     private String name;
 
+    //11位数字
     private String phone;
 
     private String sex;
 
+    //18位的数字
     private String idNumber;
 
 }
