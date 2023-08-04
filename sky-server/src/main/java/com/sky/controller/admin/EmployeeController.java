@@ -92,16 +92,29 @@ public class EmployeeController {
     }
 
     /**
-     * 员工管理 分页查询
-     * 前端请求的格式 Query
+     * 员工分页查询
      * @param employeePageQueryDTO
      * @return
      */
     @GetMapping("/page")
     @ApiOperation("员工分页查询")
-    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
-        log.info("员工分页查询,参数为：{}",employeePageQueryDTO);
-        PageResult result = employeeService.pageQuery(employeePageQueryDTO);
-        return Result.success(result);
+    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
+        log.info("员工分页查询，参数为：{}", employeePageQueryDTO);
+        PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);//后续定义
+        return Result.success(pageResult);
+    }
+
+    /**
+     * 启用禁用员工账号
+     * @param status
+     * @param id bug 这里有问题，当id太长的时候，有精度问题后面三位四舍五入了
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用、禁用员工账号")
+    public Result<String>startOrStop(@PathVariable Integer status,Long id){
+        log.info("启用或禁用员员工账户：{},{}",status,id);
+        employeeService.startOrStop(status,id);
+        return Result.success();
     }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.Page;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
+import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -31,10 +32,15 @@ public interface EmployeeMapper  extends BaseMapper<Employee> {
     int save(Employee employee);
 
     /**
-     * 员工管理 分页查询
-     * 前端请求的格式 Query
+     * 分页查询
      * @param employeePageQueryDTO
      * @return
      */
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 根据主键动态修改属性
+     * @param employee
+     */
+    void update(Employee employee);
 }
