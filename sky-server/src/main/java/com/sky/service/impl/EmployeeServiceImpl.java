@@ -71,13 +71,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     *新增员工
+     * 新增员工
+     *
      * @param employeeDTO
      * @return
      */
-    @Override
     public boolean save(EmployeeDTO employeeDTO) {
-        System.out.println("当前service的线程id" +  Thread.currentThread().getId());
+        System.out.println("当前service的线程id" + Thread.currentThread().getId());
 
         Employee employee = new Employee();
 
@@ -102,6 +102,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 分页查询
+     *
      * @param employeePageQueryDTO
      * @return
      */
@@ -125,7 +126,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param id
      */
     public void startOrStop(Integer status, Long id) {
-        Employee employee=Employee.builder()
+        Employee employee = Employee.builder()
                 .id(id)
                 .status(status)
                 .updateTime(LocalDateTime.now())
@@ -134,7 +135,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /**
-     *根据id查询员工
+     * 根据id查询员工
+     *
      * @param id
      * @return
      */
@@ -144,13 +146,20 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+    /**
+     * 编辑员工信息
+     *
+     * @param employeeDTO
+     * @return
+     */
     public void update(EmployeeDTO employeeDTO) {
-        Employee employee = new Employee();
-        BeanUtils.copyProperties(employeeDTO,employee);
-
-        employee.builder().
+        Employee employee = Employee.builder().
                 updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId());
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+
         employeeMapper.update(employee);
     }
 }
