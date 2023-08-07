@@ -5,6 +5,9 @@ import com.sky.entity.Setmeal;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+/**
+ * 套餐
+ */
 @Mapper
 public interface SetmealMapper  extends BaseMapper<Setmeal> {
 

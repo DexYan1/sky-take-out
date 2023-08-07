@@ -11,6 +11,9 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
+/**
+ * 菜品及套餐
+ */
 @Mapper
 public interface CategoryMapper extends BaseMapper<Category> {
 

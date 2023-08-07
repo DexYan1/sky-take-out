@@ -10,6 +10,9 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+/**
+ * 员工信息
+ */
 @Mapper
 public interface EmployeeMapper  extends BaseMapper<Employee> {
 
