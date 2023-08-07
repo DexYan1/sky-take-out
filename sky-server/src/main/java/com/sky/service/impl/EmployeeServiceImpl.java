@@ -41,10 +41,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         String username = employeeLoginDTO.getUsername();
         String password = employeeLoginDTO.getPassword();
 
+        //1、根据用户名查询数据库中的数据 (方式一)
+//        Employee employee = employeeMapper.getByUsername(username);
+
         LambdaQueryWrapper<Employee> lqw = new LambdaQueryWrapper<>();
         LambdaQueryWrapper<Employee> eq = lqw.eq(Employee::getUsername, username);
 
-        //1、根据用户名查询数据库中的数据
+        //1、根据用户名查询数据库中的数据 (方式二)
         Employee employee = employeeMapper.selectOne(eq);
 
         //2、处理各种异常情况（用户名不存在、密码不对、账号被锁定）
@@ -90,12 +93,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         //设置密码,默认123456 (希望把它加密)
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
         //设置当前记录的创建时间和修改时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
 
         //设置当前记录创建人id和修改人id
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
+
         employeeMapper.insert(employee);
         return true;
     }
@@ -129,7 +133,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = Employee.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
+//                .updateTime(LocalDateTime.now())
                 .build();
         employeeMapper.update(employee);
     }
@@ -142,6 +146,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     public Employee getById(Long id) {
         Employee employee = employeeMapper.selectById(id);
+//        Employee employee = employeeMapper.getById(id);
         employee.setPassword("******");
         return employee;
     }
@@ -153,9 +158,9 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return
      */
     public void update(EmployeeDTO employeeDTO) {
-        Employee employee = Employee.builder().
-                updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
+        Employee employee = Employee.builder()
+//                .updateTime(LocalDateTime.now())
+//                .updateUser(BaseContext.getCurrentId())
                 .build();
         BeanUtils.copyProperties(employeeDTO, employee);
 

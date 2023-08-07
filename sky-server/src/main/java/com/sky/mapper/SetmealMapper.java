@@ -5,13 +5,15 @@ import com.sky.entity.Setmeal;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-/**
- * @Date: 2023/8/5 - 16:00
- * @Description: com.sky.mapper
- * @version: 1.0
- */
 @Mapper
 public interface SetmealMapper  extends BaseMapper<Setmeal> {
-    @Select("select count(id) from setmeal where id = #{id};")
+
+    /**
+     * 根据分类id查询套餐的数量
+     * @param id
+     * @return
+     */
+    @Select("select count(id) from setmeal where category_id = #{categoryId}")
     Integer countByCategoryId(Long id);
+
 }

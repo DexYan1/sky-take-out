@@ -2,8 +2,10 @@ package com.sky.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.Page;
+import com.sky.annotation.AutoFill;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
+import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -28,7 +30,8 @@ public interface EmployeeMapper  extends BaseMapper<Employee> {
             "(name, username, password, phone, sex, id_number, create_time, update_time, create_user, update_user) " +
             "values " +
             "(#{name},#{username},#{password},#{phone},#{sex},#{idNumber},#{createTime},#{updateTime},#{createUser},#{updateUser});")
-    int save(Employee employee);
+    @AutoFill(value = OperationType.INSERT)
+    int insert(Employee employee);
 
     /**
      * 分页查询
@@ -41,5 +44,8 @@ public interface EmployeeMapper  extends BaseMapper<Employee> {
      * 根据主键动态修改属性
      * @param employee
      */
+    @AutoFill(value = OperationType.UPDATE)
     void update(Employee employee);
+
+    Employee getById(Long id);
 }

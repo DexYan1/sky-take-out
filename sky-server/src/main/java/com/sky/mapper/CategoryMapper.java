@@ -2,31 +2,28 @@ package com.sky.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.Page;
+import com.sky.annotation.AutoFill;
+import com.sky.enumeration.OperationType;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 
-/**
- * @Date: 2023/8/5 - 16:00
- * @Description: com.sky.mapper
- * @version: 1.0
- */
 @Mapper
-public interface CategoryMapper  extends BaseMapper<Category> {
+public interface CategoryMapper extends BaseMapper<Category> {
 
     /**
      * 插入数据
      * @param category
      * @return
      */
-//    @Insert("insert into category(type, name, sort, status, create_time, update_time, create_user, update_user)" +
-//            " VALUES" +
-//            " (#{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
-//    int insert(Category category);
+    @Insert("insert into category(type, name, sort, status, create_time, update_time, create_user, update_user)" +
+            " VALUES" +
+            " (#{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
+    @AutoFill(OperationType.INSERT)
+    int insert(Category category);
 
     /**
      * 分页查询
@@ -46,6 +43,7 @@ public interface CategoryMapper  extends BaseMapper<Category> {
      * 根据id修改分类
      * @param category
      */
+    @AutoFill(OperationType.UPDATE)
     void update(Category category);
 
     /**
@@ -54,6 +52,4 @@ public interface CategoryMapper  extends BaseMapper<Category> {
      * @return
      */
     List<Category> list(Integer type);
-
-
 }

@@ -44,10 +44,10 @@ public class CategoryServiceImpl implements CategoryService {
         //分类状态默认为禁用状态0 设置创建时间、修改时间、创建人、修改人
         Category category = Category.builder()
                 .status(StatusConstant.DISABLE)
-                .createTime(LocalDateTime.now())
-                .updateTime(LocalDateTime.now())
-                .createUser(BaseContext.getCurrentId())
-                .updateUser(BaseContext.getCurrentId())
+//                .createTime(LocalDateTime.now())
+//                .updateTime(LocalDateTime.now())
+//                .createUser(BaseContext.getCurrentId())
+//                .updateUser(BaseContext.getCurrentId())
                 .build();
         //属性拷贝
         BeanUtils.copyProperties(categoryDTO, category);
@@ -94,8 +94,8 @@ public class CategoryServiceImpl implements CategoryService {
      */
     public void update(CategoryDTO categoryDTO) {
         Category category = Category.builder()
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
+//                .updateTime(LocalDateTime.now())
+//                .updateUser(BaseContext.getCurrentId())
                 .build();
         //设置修改时间、修改人
         BeanUtils.copyProperties(categoryDTO, category);
@@ -111,8 +111,8 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = Category.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
+//                .updateTime(LocalDateTime.now())
+//                .updateUser(BaseContext.getCurrentId())
                 .build();
 
         categoryMapper.update(category);
