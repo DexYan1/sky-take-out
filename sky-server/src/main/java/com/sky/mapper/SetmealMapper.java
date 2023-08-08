@@ -19,4 +19,5 @@ public interface SetmealMapper  extends BaseMapper<Setmeal> {
     @Select("select count(id) from setmeal where category_id = #{categoryId}")
     Integer countByCategoryId(Long id);
 
+    void update(Setmeal setmeal);
 }
